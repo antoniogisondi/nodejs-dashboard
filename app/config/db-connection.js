@@ -12,15 +12,15 @@ class DbConnection extends EventEmitter {
         this.mongoClient.connect((err, mongodb) => {
             if (err) throw err;
             this.emit('dbConnection', {
-                db: this.mongoClient.db(/* mettere nome database */)
+                db: this.mongoClient.db('dashboard')
             });
             DbConnection.setInstance(mongodb);
         })
     }
 
     static setInstance(mongodb) {
-        DbConnection.db = mongodb.db(/* mettere nome database */);
-        DbConnection.userCollection = DbConnection.db.collection(/* mettere nome collection */);
+        DbConnection.db = mongodb.db('dashboard');
+        DbConnection.userCollection = DbConnection.db.collection('users');
     }
 }
 
