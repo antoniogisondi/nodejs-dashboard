@@ -44,7 +44,9 @@ app.use(home)
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(loginRouter);
-app.use('/user', checkUserLogin(), userRouter);
 
 // FUNZIONI PER LA REGISTRAZIONE
 app.use(register)
+
+// ROTTA PER CHI è AUTENTICATO
+app.use('/user', checkUserLogin(), userRouter);
