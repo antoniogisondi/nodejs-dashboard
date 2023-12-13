@@ -13,6 +13,7 @@ const conn = new DbConnection();
 const home = require('./app/routes/home')
 const loginRouter = require('./app/routes/login');
 const userRouter = require('./app/routes/user');
+const register = require('./app/routes/register')
 
 // CONNESSIONE AL DATABASE
 conn.on('dbConnection', conn => {
@@ -25,6 +26,8 @@ conn.getConnection();
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
 
+// FILE STATICI
+app.use('/public', express.static(__dirname + '/public'));
 
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
@@ -42,3 +45,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(loginRouter);
 app.use('/user', checkUserLogin(), userRouter);
+
+// FUNZIONI PER LA REGISTRAZIONE
+app.use(register)
